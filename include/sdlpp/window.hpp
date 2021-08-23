@@ -6,9 +6,8 @@
 namespace sdl {
 
 struct Window : public detail::UniquePtr<SDL_Window, SDL_DestroyWindow> {
-    Window()
-        : UniquePtr{SDL_CreateWindow(
-              "Sdl stuff", 0, 0, 500, 500, SDL_WINDOW_SHOWN)} {}
+    Window(const char *title, int x, int y, int w, int h, Uint32 flags)
+        : UniquePtr{SDL_CreateWindow(title, x, x, w, h, flags)} {}
 
     inline void show() {
         SDL_ShowWindow(get());
