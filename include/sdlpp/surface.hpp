@@ -8,7 +8,7 @@ namespace sdl {
 
 struct Surface : detail::UniquePtr<SDL_Surface, SDL_FreeSurface> {};
 
-Surface loadBmp(std::string_view data) {
+inline Surface loadBmp(std::string_view data) {
     return Surface{SDL_LoadBMP(data.data())};
 }
 
