@@ -16,7 +16,7 @@ struct Renderer : public detail::UniquePtr<SDL_Renderer, SDL_DestroyRenderer> {
         SDL_RenderClear(get());
     }
 
-    inline void setDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255) {
+    inline void drawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255) {
         SDL_SetRenderDrawColor(get(), r, g, b, a);
     }
 
@@ -101,7 +101,9 @@ struct Renderer : public detail::UniquePtr<SDL_Renderer, SDL_DestroyRenderer> {
         }
     }
 
-    void fillLine();
+    inline int renderTarget(SDL_Texture *texture) {
+        return SDL_SetRenderTarget(get(), texture);
+    }
 };
 
 } // namespace sdl
