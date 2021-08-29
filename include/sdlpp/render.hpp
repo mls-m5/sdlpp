@@ -4,6 +4,7 @@
 #include "surface.hpp"
 #include "texture.hpp"
 #include <SDL2/SDL_render.h>
+#include <optional>
 
 namespace sdl {
 
@@ -90,10 +91,14 @@ struct Renderer : public detail::UniquePtr<SDL_Renderer, SDL_DestroyRenderer> {
         SDL_SetRenderDrawBlendMode(get(), mode);
     }
 
-    inline SDL_BlendMode drawBlendMode() {
+    inline std::optional<SDL_BlendMode> drawBlendMode() {
         SDL_BlendMode mode;
-        SDL_GetRenderDrawBlendMode(get(), &mode);
-        return mode;
+        if (!SDL_GetRenderDrawBlendMode(get(), &mode)) {
+            return mode;
+        }
+        else {
+            return {};
+        }
     }
 
     void fillLine();
