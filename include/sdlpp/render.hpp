@@ -86,6 +86,16 @@ struct Renderer : public detail::UniquePtr<SDL_Renderer, SDL_DestroyRenderer> {
         return dims;
     }
 
+    inline void drawBlendMode(SDL_BlendMode mode) {
+        SDL_SetRenderDrawBlendMode(get(), mode);
+    }
+
+    inline SDL_BlendMode drawBlendMode() {
+        SDL_BlendMode mode;
+        SDL_GetRenderDrawBlendMode(get(), &mode);
+        return mode;
+    }
+
     void fillLine();
 };
 
