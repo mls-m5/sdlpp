@@ -31,6 +31,26 @@ struct Renderer : public detail::UniquePtr<SDL_Renderer, SDL_DestroyRenderer> {
         SDL_RenderDrawLine(get(), x1, y1, x2, y2);
     }
 
+    template <typename T>
+    inline void drawPoint(const T &point) {
+        SDL_RenderDrawPoint(get(), point.x, point.y);
+    }
+
+    template <typename T>
+    inline void drawPointF(const T &point) {
+        SDL_RenderDrawPoint(get(), point.x, point.y);
+    }
+
+    template <typename T>
+    inline void drawPoints(const T &points) {
+        SDL_RenderDrawPoints(get(), points.get(), points.size());
+    }
+
+    template <typename T>
+    inline void drawPointsF(const T &points) {
+        SDL_RenderDrawPointsF(get(), points.get(), points.size());
+    }
+
     inline void present() {
         SDL_RenderPresent(get());
     }
