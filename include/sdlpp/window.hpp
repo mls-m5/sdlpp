@@ -1,6 +1,7 @@
 #pragma once
 
 #include "detail/uniqueptr.hpp"
+#include "rect.hpp"
 #include <SDL2/SDL_video.h>
 
 namespace sdl {
@@ -14,6 +15,24 @@ struct WindowImpl : public Container {
 
     inline void show() {
         SDL_ShowWindow(this->get());
+    }
+
+    inline void size(int width, int height) {
+        SDL_SetWindowSize(this->get(), width, height);
+    }
+
+    inline sdl::Dims size() {
+        auto dims = sdl::Dims{};
+        SDL_SetWindowSize(this->get(), dims.w, dims.h);
+        return dims;
+    }
+
+    inline void title(const char *title) {
+        SDL_SetWindowTitle(this->get(), title);
+    }
+
+    inline char *title() {
+        SDL_GetWindowTitle(this->get());
     }
 };
 
