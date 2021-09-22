@@ -32,7 +32,7 @@ struct WindowImpl : public Container {
     }
 
     inline char *title() {
-        SDL_GetWindowTitle(this->get());
+        return SDL_GetWindowTitle(this->get());
     }
 };
 
