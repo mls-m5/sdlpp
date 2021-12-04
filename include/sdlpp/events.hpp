@@ -5,6 +5,8 @@
 
 namespace sdl {
 
+using Event = SDL_Event;
+
 std::optional<SDL_Event> pollEvent() {
     SDL_Event event;
     if (SDL_PollEvent(&event)) {
