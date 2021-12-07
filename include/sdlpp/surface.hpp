@@ -3,6 +3,7 @@
 #include "detail/uniqueptr.hpp"
 #include <SDL2/SDL_render.h>
 #include <memory>
+#include <string_view>
 
 namespace sdl {
 
