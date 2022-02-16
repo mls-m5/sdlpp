@@ -9,7 +9,7 @@ namespace sdl {
  *
  * \note This value wraps if the program runs for more than ~49 days.
  */
-Uint32 getTicks() {
+inline Uint32 getTicks() {
     return SDL_GetTicks();
 }
 
@@ -22,28 +22,28 @@ Uint32 getTicks() {
  *      ... do work until timeout has elapsed
  *  }
  */
-constexpr bool ticksPassed(Sint32 a, Sint32 b) {
+inline constexpr bool ticksPassed(Sint32 a, Sint32 b) {
     return b - a <= 0;
 }
 
 /**
  * \brief Get the current value of the high resolution counter
  */
-Uint64 getPerformanceCounter() {
+inline Uint64 getPerformanceCounter() {
     return SDL_GetPerformanceCounter();
 }
 
 /**
  * \brief Get the count per second of the high resolution counter
  */
-Uint64 getPerformanceFrequency() {
+inline Uint64 getPerformanceFrequency() {
     return SDL_GetPerformanceFrequency();
 }
 
 /**
  * \brief Wait a specified number of milliseconds before returning.
  */
-void delay(Uint32 ms) {
+inline void delay(Uint32 ms) {
     return SDL_Delay(ms);
 }
 
@@ -67,7 +67,7 @@ using TimerId = SDL_TimerID;
  *
  * \return A timer ID, or 0 when an error occurs.
  */
-TimerId addTimer(Uint32 interval, TimerCallback callback, void *param) {
+inline TimerId addTimer(Uint32 interval, TimerCallback callback, void *param) {
     return SDL_AddTimer(interval, callback, param);
 }
 
@@ -78,7 +78,7 @@ TimerId addTimer(Uint32 interval, TimerCallback callback, void *param) {
  *
  * \warning It is not safe to remove a timer multiple times.
  */
-bool removeTimer(TimerId id) {
+inline bool removeTimer(TimerId id) {
     return SDL_RemoveTimer(id);
 }
 

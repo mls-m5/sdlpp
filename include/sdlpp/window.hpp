@@ -2,6 +2,7 @@
 
 #include "detail/uniqueptr.hpp"
 #include "rect.hpp"
+#include <SDL2/SDL_mouse.h>
 #include <SDL2/SDL_video.h>
 
 namespace sdl {
@@ -70,6 +71,24 @@ struct WindowImpl : public Container {
 
     void restore() {
         SDL_RestoreWindow(this->get());
+    }
+
+    int fullscreen(Uint32 flags) {
+        return SDL_SetWindowFullscreen(this->get(), flags);
+    }
+
+    void warpMouse(int x, int y) {
+        SDL_WarpMouseInWindow(this->get(), x, y);
+    }
+
+    /// Swap opengl buffers
+    void swap() {
+        SDL_GL_SwapWindow(this->get());
+    }
+
+    /// Return curent active OpenGL window
+    static WindowImpl<View<SDL_Window>> current() {
+        return SDL_GL_GetCurrentWindow();
     }
 
     /// Create a view (non owning) from a windows id

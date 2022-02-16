@@ -19,8 +19,8 @@ struct View {
     using ViewT = View;
     Type *ptr = {};
 
-    View(Type *value)
-        : ptr(value) {}
+    View(Type *value) : ptr(value) {
+    }
 
     View() = default;
     View(const View &) = default;
