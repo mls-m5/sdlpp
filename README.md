@@ -36,3 +36,24 @@ int main(int argc, char **argv) {
     return 0;
 }
 ``` 
+
+## Link with cmake
+
+```cmake
+target_link_libraries(
+    ${PROJECT_NAME}
+    PUBLIC
+    sdlpp # Required
+    SDL2::TTF   # Optional se bellow
+    SDL2::Image # Optional se bellow
+    )
+```
+
+If you want to link extra libraries like SDL2_ttf or SDL2_image do the similar to the following
+
+```cmake
+list(APPEND
+    CMAKE_MODULE_PATH
+    ${CMAKE_CURRENT_SOURCE_DIR}/lib/sdlpp/cmake/sdl2)
+find_package(SDL2_ttf REQUIRED)
+```
