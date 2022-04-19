@@ -239,8 +239,7 @@ struct SurfaceImpl : Container {
                               dstRect ? &*dstRect : nullptr);
     }
 
-    SurfaceImpl<detail::UniquePtr<SDL_Surface, SDL_FreeSurface>> duplicate()
-        const {
+    SurfaceImpl<detail::UniquePtr<SDL_Surface, SDL_FreeSurface>> duplicate() {
         return {SDL_DuplicateSurface(this->get())};
     }
 };
