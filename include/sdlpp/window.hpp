@@ -2,6 +2,7 @@
 
 #include "detail/uniqueptr.hpp"
 #include "rect.hpp"
+#include "surface.hpp"
 #include <SDL2/SDL_mouse.h>
 #include <SDL2/SDL_video.h>
 
@@ -12,8 +13,7 @@ namespace detail {
 template <typename Container>
 struct WindowImpl : public Container {
     WindowImpl(const char *title, int x, int y, int w, int h, Uint32 flags)
-        : Container{SDL_CreateWindow(title, x, x, w, h, flags)} {
-    }
+        : Container{SDL_CreateWindow(title, x, x, w, h, flags)} {}
 
     using Container::Container;
 
@@ -94,6 +94,14 @@ struct WindowImpl : public Container {
     /// Create a view (non owning) from a windows id
     static inline WindowImpl<View<SDL_Window>> fromId(Uint32 id) {
         return {SDL_GetWindowFromID(id)};
+    }
+
+    SurfaceView surface() {
+        return {SDL_GetWindowSurface(this->get())};
+    }
+
+    int updateSurface() {
+        return SDL_UpdateWindowSurface(this->get());
     }
 };
 
