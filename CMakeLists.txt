@@ -7,9 +7,6 @@ add_library(
     INTERFACE
     )
 
-list(APPEND
-    CMAKE_MODULE_PATH
-    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/sdl2)
 find_package(SDL2 REQUIRED)
 
 target_include_directories(
@@ -22,7 +19,7 @@ target_include_directories(
 target_link_libraries(
     ${PROJECT_NAME}
     INTERFACE
-    SDL2::Main
+    ${SDL2_LIBRARIES}
     )
 
 target_compile_features(
