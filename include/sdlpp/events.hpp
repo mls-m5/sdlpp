@@ -17,6 +17,19 @@ std::optional<SDL_Event> pollEvent() {
     }
 }
 
+//! Example usage
+//! ```c++
+//! auto running = true;
+//! for (std::optional<SDL_Event> o; (o = sdl::waitEvent()) && running;) {
+//! auto event = *o;
+//!
+//! switch (event.type) {
+//! case SDL_QUIT:
+//!     running = false;
+//!     break;
+//! }
+//! }
+//! ```
 SDL_Event waitEvent() {
     SDL_Event event;
     if (SDL_WaitEvent(&event)) {
