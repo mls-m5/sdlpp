@@ -121,6 +121,26 @@ struct RendererImpl : public Container {
     inline operator RendererImpl<detail::View<SDL_Renderer>>() {
         return RendererImpl<detail::View<SDL_Renderer>>{this->get()};
     }
+
+    inline int scale(float x, float y) {
+        return SDL_RenderSetScale(this->get(), x, y);
+    }
+
+    inline std::pair<float, float> scale() {
+        float x = 0, y = 0;
+        SDL_RenderGetScale(this->get(), &x, &y);
+        return {x, y};
+    }
+
+    int blendMode(SDL_BlendMode mode) {
+        return SDL_SetRenderDrawBlendMode(this->get(), mode);
+    }
+
+    SDL_BlendMode blendMode() {
+        SDL_BlendMode mode = {};
+        SDL_GetRenderDrawBlendMode(this->get(), &mode);
+        return mode;
+    }
 };
 
 } // namespace detail
