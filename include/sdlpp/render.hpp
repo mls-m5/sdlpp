@@ -47,7 +47,7 @@ struct RendererImpl : public Container {
 
     template <typename T>
     inline void drawPointF(const T &point) {
-        SDL_RenderDrawPoint(this->get(), point.x, point.y);
+        SDL_RenderDrawPointF(this->get(), point.x, point.y);
     }
 
     template <typename T>
