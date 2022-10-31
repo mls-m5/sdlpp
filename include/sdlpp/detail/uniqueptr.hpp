@@ -8,8 +8,8 @@ namespace detail {
 
 template <typename Type, void (*DestroyFunction)(Type *)>
 struct Deleter {
-    void operator()(Type *texture) {
-        DestroyFunction(texture);
+    void operator()(Type *ptr) {
+        DestroyFunction(ptr);
     }
 };
 
