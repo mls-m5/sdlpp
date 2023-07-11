@@ -5,8 +5,13 @@
 #include "texture.hpp"
 #include <SDL2/SDL_render.h>
 #include <optional>
+#include <span>
 
 namespace sdl {
+
+using Vertex = SDL_Vertex;
+using FPoint = SDL_FPoint;
+
 namespace detail {
 
 template <typename Container>
@@ -113,6 +118,44 @@ struct RendererImpl : public Container {
             return {};
         }
     }
+
+#if __cplusplus >= 202002L
+    inline int renderGeometry(TextureView texture,
+                              std::span<const Vertex> vertices,
+                              std::span<const int> indices) {
+        return SDL_RenderGeometry(this->get(),
+                                  texture,
+                                  vertices.data(),
+                                  vertices.size(),
+                                  indices.data(),
+                                  indices.size());
+    }
+
+    template <typename IndexType>
+    int renderGeometryRaw(SDL_Texture *texture,
+                          const float *xy,
+                          int xy_stride,
+                          const SDL_Color *color,
+                          int color_stride,
+                          const float *uv,
+                          int uv_stride,
+                          int num_vertices,
+                          const IndexType *indices,
+                          int num_indices) {
+        return SDL_RenderGeometryRaw(this->get(),
+                                     texture,
+                                     xy,
+                                     xy_stride,
+                                     color,
+                                     color_stride,
+                                     uv,
+                                     uv_stride,
+                                     num_vertices,
+                                     indices,
+                                     num_indices,
+                                     sizeof(IndexType));
+    }
+#endif
 
     inline int renderTarget(SDL_Texture *texture) {
         return SDL_SetRenderTarget(this->get(), texture);
