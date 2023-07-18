@@ -9,8 +9,10 @@ Basic c++ wrapper around sdl2's c api
 #include "sdlpp/render.hpp"
 #include "sdlpp/window.hpp"
 #include <thread>
+#include <iostream>
 
 int main(int argc, char **argv) {
+    using namespace std::chrono_literals;
     auto window = sdl::Window{"sdl window",
                               SDL_WINDOWPOS_CENTERED,
                               SDL_WINDOWPOS_CENTERED,
