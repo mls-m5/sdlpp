@@ -19,8 +19,8 @@ struct View {
     using ViewT = View;
     Type *ptr = {};
 
-    View(Type *value) : ptr(value) {
-    }
+    View(Type *value)
+        : ptr(value) {}
 
     View() = default;
     View(const View &) = default;
@@ -36,7 +36,15 @@ struct View {
         return ptr;
     }
 
+    const Type *get() const {
+        return ptr;
+    }
+
     Type *operator->() {
+        return ptr;
+    }
+
+    const Type *operator->() const {
         return ptr;
     }
 };

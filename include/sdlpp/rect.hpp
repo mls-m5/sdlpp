@@ -5,7 +5,7 @@
 namespace sdl {
 
 struct Rect : public SDL_Rect {
-    inline bool empty() {
+    inline bool empty() const {
         return SDL_RectEmpty(get());
     }
 
@@ -17,13 +17,13 @@ struct Rect : public SDL_Rect {
         return SDL_HasIntersection(a.get(), b.get());
     }
 
-    inline Rect intersect(const Rect &other) {
+    inline Rect intersect(const Rect &other) const {
         Rect result;
         SDL_IntersectRect(get(), other.get(), result.get());
         return result;
     }
 
-    inline Rect calculateUnion(const Rect &other) {
+    inline Rect calculateUnion(const Rect &other) const {
         Rect result;
         SDL_UnionRect(get(), other.get(), result.get());
         return result;
@@ -39,7 +39,7 @@ struct Rect : public SDL_Rect {
 };
 
 struct Point : public SDL_Point {
-    bool inRect(const SDL_Rect &rect) {
+    bool inRect(const SDL_Rect &rect) const {
         return SDL_PointInRect(this, &rect);
     }
 };
