@@ -95,8 +95,8 @@ struct RendererImpl : public Container {
             this->get(), texture, srcrect, dstrect, angle, center, flip);
     }
 
-    inline Texture createTextureFromSurface(SDL_Surface *surface) {
-        return {SDL_CreateTextureFromSurface(this->get(), surface)};
+    inline Texture createTextureFromSurface(SurfaceView surface) {
+        return {SDL_CreateTextureFromSurface(this->get(), surface.get())};
     }
 
     inline Dims getOutputSize() {
