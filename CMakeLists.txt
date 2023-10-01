@@ -21,10 +21,19 @@ target_include_directories(
     )
 
 if (EMSCRIPTEN)
-    set(
-        CMAKE_CXX_FLAGS
-        "${CMAKE_CXX_FLAGS} -sUSE_SDL=2"
-        )
+    target_compile_options(
+        ${PROJECT_NAME}
+        INTERFACE
+        -sUSE_SDL=2
+        -sUSE_SDL_IMAGE=2
+    )
+
+    target_link_options(
+        ${PROJECT_NAME}
+        INTERFACE
+        -sUSE_SDL=2
+        -sUSE_SDL_IMAGE=2
+    )
 else()
 
     find_package(SDL2 REQUIRED)
