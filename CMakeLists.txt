@@ -34,6 +34,20 @@ if (EMSCRIPTEN)
         -sUSE_SDL=2
         -sUSE_SDL_IMAGE=2
     )
+
+    if(CMAKE_BUILD_TYPE MATCHES Debug)
+        target_compile_options(
+        ${PROJECT_NAME}
+        INTERFACE
+        -gsource-map
+        )
+
+        target_link_options(
+        ${PROJECT_NAME}
+        INTERFACE
+        -gsource-map
+        )
+    endif() # Debug
 else()
 
     find_package(SDL2 REQUIRED)
