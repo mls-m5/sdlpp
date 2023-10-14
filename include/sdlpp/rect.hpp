@@ -42,6 +42,10 @@ struct Point : public SDL_Point {
     bool inRect(const SDL_Rect &rect) const {
         return SDL_PointInRect(this, &rect);
     }
+
+    SDL_Point *get() {
+        return this;
+    }
 };
 
 struct Dims {
