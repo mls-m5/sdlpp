@@ -184,6 +184,23 @@ struct RendererImpl : public Container {
         SDL_GetRenderDrawBlendMode(this->get(), &mode);
         return mode;
     }
+
+    /// \param rect or null for the entire target
+    /// @returns 0 on success
+    int readPixels(const SDL_Rect *rect,
+                   Uint32 format,
+                   void *pixels,
+                   int pitch) {
+        return SDL_RenderReadPixels(this->get(), rect, format, pixels, pitch);
+    }
+
+    /// Shortahnd notation for getting pixels into a surface
+    int readPixels(sdl::SurfaceView surface) {
+        return readPixels(sdl::Rect{0, 0, surface->w, surface->h}.get(),
+                          surface->format->format,
+                          surface->pixels,
+                          surface->pitch);
+    }
 };
 
 } // namespace detail
