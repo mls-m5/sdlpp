@@ -13,6 +13,9 @@ struct Deleter {
     }
 };
 
+template <typename Type, void (*DestroyFunction)(Type *)>
+struct UniquePtr;
+
 // Non owning pointer type
 template <typename Type>
 struct View {
@@ -21,6 +24,10 @@ struct View {
 
     View(Type *value)
         : ptr(value) {}
+
+    template <typename T>
+    View(T &other)
+        : ptr(other.get()) {}
 
     View() = default;
     View(const View &) = default;
