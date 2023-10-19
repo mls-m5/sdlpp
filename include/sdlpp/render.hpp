@@ -100,7 +100,7 @@ struct RendererImpl : public Container {
     }
 
     inline Dims getOutputSize() {
-        Dims dims;
+        auto dims = Dims{};
         SDL_GetRendererOutputSize(this->get(), &dims.w, &dims.h);
         return dims;
     }
@@ -110,13 +110,26 @@ struct RendererImpl : public Container {
     }
 
     inline std::optional<SDL_BlendMode> drawBlendMode() {
-        SDL_BlendMode mode;
+        auto mode = SDL_BlendMode{};
         if (!SDL_GetRenderDrawBlendMode(this->get(), &mode)) {
             return mode;
         }
         else {
             return {};
         }
+    }
+
+    /// Get viewport
+    inline sdl::Rect viewport() const {
+        auto ret = sdl::Rect{};
+        SDL_RenderGetViewport(this->get, ret.get());
+        return ret;
+    }
+
+    /// Set viewport
+    /// rect == null -> the whole viewport
+    inline void viewport(sdl::Rect *rect) {
+        SDL_RenderGetViewport(this->get, rect);
     }
 
 #if __cplusplus >= 202002L
