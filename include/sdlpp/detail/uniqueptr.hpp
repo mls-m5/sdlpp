@@ -74,6 +74,11 @@ struct UniquePtr : std::unique_ptr<Type, Deleter<Type, DestroyFunction>> {
     operator ViewT() {
         return {this->get()};
     }
+
+    Type *release() {
+        return this
+            ->std::unique_ptr<Type, Deleter<Type, DestroyFunction>>::release();
+    }
 };
 
 } // namespace detail

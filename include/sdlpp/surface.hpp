@@ -98,7 +98,7 @@ struct SurfaceImpl : Container {
             pixels, width, height, depth, pitch, format)};
     }
 
-    int saveBMP(const char *file) const {
+    int saveBMP(const char *file) {
         return SDL_SaveBMP_RW(this->get(), SDL_RWFromFile(file, "wb"), 1);
     }
 
