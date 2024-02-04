@@ -178,6 +178,12 @@ struct SurfaceImpl : Container {
         return alpha;
     }
 
+    void fillRect(std::optional<sdl::Rect> rect, sdl::Color color) {
+        SDL_FillRect(this->get(),
+                     rect ? &*rect : nullptr,
+                     reinterpret_cast<Uint32 &>(color));
+    }
+
     int blendMode(SDL_BlendMode mode) {
         return SDL_SetSurfaceBlendMode(this->get(), mode);
     }
