@@ -49,7 +49,7 @@ struct WindowImpl : public Container {
 
     inline sdl::Dims size() {
         auto dims = sdl::Dims{};
-        SDL_SetWindowSize(this->get(), dims.w, dims.h);
+        SDL_GetWindowSize(this->get(), &dims.w, &dims.h);
         return dims;
     }
 
