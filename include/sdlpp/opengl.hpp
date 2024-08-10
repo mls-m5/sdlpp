@@ -66,5 +66,9 @@ inline int getSwapInterval() {
     return SDL_GL_GetSwapInterval();
 }
 
+inline int enableDebugPrint() {
+    return SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG);
+}
+
 } // namespace gl
 } // namespace sdl
