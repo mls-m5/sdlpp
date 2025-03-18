@@ -10,8 +10,8 @@ namespace ttf {
 struct Font : public sdl::detail::UniquePtr<TTF_Font, TTF_CloseFont> {
     using UniquePtr::UniquePtr;
 
-    Font(const char *file, int ptsize)
-        : UniquePtr{TTF_OpenFont(file, ptsize)} {}
+    Font(const char *file, int ptsize) : UniquePtr{TTF_OpenFont(file, ptsize)} {
+    }
 
     inline int style() const {
         return TTF_GetFontStyle(get());
@@ -108,13 +108,13 @@ struct Font : public sdl::detail::UniquePtr<TTF_Font, TTF_CloseFont> {
     }
 
     inline sdl::Dims sizeTextUtf8(const char *text) const {
-        sdl::Dims dims;
+        sdl::Dims dims{};
         TTF_SizeUTF8(get(), text, &dims.w, &dims.h);
         return dims;
     }
 
     inline sdl::Dims sizeTextUNICODE(const Uint16 *text) const {
-        sdl::Dims dims;
+        sdl::Dims dims{};
         TTF_SizeUNICODE(get(), text, &dims.w, &dims.h);
         return dims;
     }
